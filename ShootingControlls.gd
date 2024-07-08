@@ -3,9 +3,10 @@ extends Node2D
 @onready var cross_hair = get_node("CrosshairSprite")
 
 func _ready():
-	cross_hair.visible = false
+	pass
 
 func _process(_delta):
+	CrosshairPosition()
 	ShootMode()
 
 	pass
