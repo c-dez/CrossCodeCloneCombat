@@ -1,13 +1,13 @@
 extends Node2D
 
 @onready var cross_hair = get_node("CrosshairSprite")
-
+@onready var player = get_node("../Player")
 func _ready():
 	pass
 
-func _process(_delta):
+func _physics_process(_delta):
 	CrosshairPosition()
-	ShootMode()
+	queue_redraw()
 
 	pass
 
@@ -16,7 +16,5 @@ func CrosshairPosition():
 	pass
 
 	
-func ShootMode():
-	if Input.is_action_pressed("fire2"):
-		# quiero que aparesca una linea entre el jugador y el crosshair
-		pass
+func _draw():
+	draw_line(player.position,get_global_mouse_position(), Color(1,0,0,1), -1.0, true)
