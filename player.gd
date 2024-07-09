@@ -19,34 +19,28 @@ func _physics_process(delta):
 
     pass
 
-func Dash(delta):
+func Dash(delta)->void:
 
     #TODO: PONER UN COOLDOWN DEPUES DE USAR DASH CONSECUTIVOS , PARA EVITAR SPAM
 
     if Input.is_action_just_pressed("space"):
         # al presionar space, inicia una cuenta regresiva, mientras este corriendo esta cuenta, el multiplicador de dash se incrementa y cuando termina la cuenta regresiva multiplicador dash regresa a default que es 1
         timer = base_stats.dash_timer
-        # print(timer)
     if timer > 0:
         timer -= delta
         dash_mult = base_stats.dash_mult
-        print(timer)
     elif timer < 0 :
         dash_mult = 1
         timer = 0
+    pass
 
-func Move():
+func Move()->void:
     var input:Vector2 = Input.get_vector("left","right", "up", "down").normalized()
     if input != Vector2.ZERO :
         velocity = input * move_speed *dash_mult
     else:
         velocity = Vector2.ZERO
     move_and_slide()
-
-    
-
-
-    
     pass
 
 
