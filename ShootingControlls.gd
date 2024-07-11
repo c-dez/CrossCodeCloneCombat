@@ -15,10 +15,11 @@ var line_width:float = 4.0
 var anti_alising:bool = false
 
 # testing area2d
-
+@onready var area2d:Area2D = get_node("Area2D")
 
 
 func _ready():
+	
 	pass
 
 
@@ -26,9 +27,18 @@ func _physics_process(delta):
 	CrosshairPosition()
 	queue_redraw()
 	Aim_And_Shoot(delta)
-	pass
+	Melee_Attack()
+	
 
-
+func Melee_Attack():
+	area2d.global_position = shoot_position.global_position
+	area2d.look_at(cross_hair.position)
+	if Input.is_action_just_pressed("fire1") and !Input.is_action_pressed("fire2"):
+		area2d.monitoring = true
+		print("true")
+	else:
+		area2d.monitoring = false
+		print("false")
 
 func Aim_And_Shoot(_delta)->void:
 	if Input.is_action_just_pressed("fire1") and Input.is_action_pressed("fire2"):
@@ -46,13 +56,13 @@ func Aim_And_Shoot(_delta)->void:
 
 func CrosshairPosition()->void:
 	cross_hair.position = get_global_mouse_position()
-	var pos:Vector2 = get_global_mouse_position()
+	# var pos:Vector2 = get_global_mouse_position()
 	
 	pass
 
 	
 func _draw()->void:
-	var pos:Vector2 = get_global_mouse_position()
+	var pos:Vector2 = cross_hair.position
 
 	# draw_line(Vector2(300,300), Vector2(500,500),color)
 	# draw_line(Vector2(300,300), Vector2(700,700),Color(3,0,0,1))
