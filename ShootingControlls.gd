@@ -27,14 +27,14 @@ func _physics_process(delta):
 	Melee_Attack()
 	pass
 
-func Melee_Attack():
+func Melee_Attack()->void:
 	melee_hutBox.global_position = shoot_position.global_position
 	melee_hutBox.look_at(cross_hair.position)
 	if Input.is_action_just_pressed("fire1") and !Input.is_action_pressed("fire2"):
 		melee_hutBox.monitoring = true
-		var test = melee_hutBox.get_overlapping_areas()
-		for item in test.size():
-			test[item].get_parent().get_node("EnemyLogic").Damage(melee_damage)
+		var area = melee_hutBox.get_overlapping_areas()
+		for item in area.size():
+			area[item].get_parent().get_node("EnemyLogic").Damage(melee_damage)
 	
 	pass
 
