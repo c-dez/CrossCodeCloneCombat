@@ -27,14 +27,14 @@ func Space_key_Just_Pressed()->bool:
         return false
 
 
-func Mouse_Button_1_Just_Pressed()->bool:
+func Mouse_Button_Left_Just_Pressed()->bool:
     if Input.is_action_just_pressed(keys_map.attack):
         return true
     else:
         return false
 
 
-func Mouse_Button_2_Pressed()->bool:
+func Mouse_Button_Right_Pressed()->bool:
     if Input.is_action_pressed(keys_map.aim):
         return true
     else:

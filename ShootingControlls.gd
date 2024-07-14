@@ -5,7 +5,7 @@ extends Node2D
 # damageNumbers class
 @onready var damage_numbers := DamageNumbers.new()
 # keybidings class
-@onready var player_inputs = PlayerInputs.new()
+@onready var player_inputs := PlayerInputs.new()
 
 # shooting
 @onready var cross_hair = get_node("CrosshairSprite")
@@ -24,7 +24,7 @@ var anti_alising:bool = false
 
 # TODO: EL NOMBRE DE ESTE SCRIPT DEBERIA SER ATTACK CONTROLS O ALGO ASI, QUE ESTE SCRIPT NO SOLO CONTROLA SHOOTING, TAMBIEN MELEE DAMAGE
 
-func _physics_process(delta):
+func _physics_process(delta:float):
 	CrosshairPosition()
 	queue_redraw()
 	Aim_And_Shoot(delta)
@@ -38,7 +38,7 @@ func Melee_Attack()->void:
 	
 	melee_hutBox.global_position = shoot_position.global_position
 	melee_hutBox.look_at(cross_hair.position)
-	if player_inputs.Mouse_Button_1_Just_Pressed() and !player_inputs.Mouse_Button_2_Pressed():
+	if player_inputs.Mouse_Button_Left_Just_Pressed() and !player_inputs.Mouse_Button_Right_Pressed():
 		melee_hutBox.monitoring = true
 		var area:Array = melee_hutBox.get_overlapping_areas()
 		for item in area.size():
@@ -47,8 +47,8 @@ func Melee_Attack()->void:
 	pass
 
 
-func Aim_And_Shoot(_delta)->void:
-	if player_inputs.Mouse_Button_1_Just_Pressed() and player_inputs.Mouse_Button_2_Pressed():
+func Aim_And_Shoot(_delta:float)->void:
+	if player_inputs.Mouse_Button_Left_Just_Pressed() and player_inputs.Mouse_Button_Right_Pressed():
 		var bullet_instance := new_bullet.instantiate()
 		shoot_position.add_child(bullet_instance)
 		bullet_instance.position = shoot_position.get_global_position()
@@ -65,7 +65,7 @@ func CrosshairPosition()->void:
 	
 func _draw()->void:
 	var pos:Vector2 = cross_hair.position
-	if player_inputs.Mouse_Button_2_Pressed():
+	if player_inputs.Mouse_Button_Right_Pressed():
 		draw_line(shoot_position.get_global_position(), pos  , color, line_width, anti_alising)
 
 	# draw_line(Vector2(300,300), Vector2(500,500),color)
