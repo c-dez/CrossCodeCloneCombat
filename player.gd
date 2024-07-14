@@ -48,8 +48,8 @@ func Dash(delta:float)->void:
 
 
 func Move()->void:
-    if player_inputs.Move_Vector() != Vector2.ZERO:
-        velocity = player_inputs.Move_Vector() * base_stats.move_speed * dash_mult
+    if player_inputs.Move_Direction_Vector() != Vector2.ZERO:
+        velocity = player_inputs.Move_Direction_Vector() * base_stats.move_speed * dash_mult
     else:
         velocity = Vector2.ZERO
     move_and_slide()
