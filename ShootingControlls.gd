@@ -2,14 +2,16 @@ extends Node2D
 
 @onready var player = get_node("../Player")
 
+# damageNumbers class
+@onready var damage_numbers := DamageNumbers.new()
+# keybidings class
+@onready var player_inputs = PlayerInputs.new()
+
 # shooting
 @onready var cross_hair = get_node("CrosshairSprite")
 @onready var shoot_position = get_node("../Player/BulletArm/BulletStartingPoint")
 @onready var new_bullet: = preload("res://scenes/bullet.tscn")
-var bullet_speed:int = 200
 
-# melee
-var melee_damage:int = 25# hardcoded
 
 # parametros drawn_line() NOT IN USE
 var color:Color = Color(0,1,0, 0.3)
@@ -19,8 +21,6 @@ var anti_alising:bool = false
 # melee_hutBox
 @onready var melee_hutBox:Area2D = get_node("Area2D")
 
-# keybidings
-@onready var player_inputs = PlayerInputs.new()
 
 # TODO: EL NOMBRE DE ESTE SCRIPT DEBERIA SER ATTACK CONTROLS O ALGO ASI, QUE ESTE SCRIPT NO SOLO CONTROLA SHOOTING, TAMBIEN MELEE DAMAGE
 
@@ -32,7 +32,9 @@ func _physics_process(delta):
 	pass
 
 func Melee_Attack()->void:
-	# hurtbox debe de estar enfrente de el personaje
+	# melee hurtbox debe de estar enfrente de el personaje o mirar al mouse global position? solo con gameplay testing puedo estar seguro
+
+	# MELEE HURTBOX MIRA A MOUSE GLOBAL POSITION
 	
 	melee_hutBox.global_position = shoot_position.global_position
 	melee_hutBox.look_at(cross_hair.position)
@@ -40,23 +42,19 @@ func Melee_Attack()->void:
 		melee_hutBox.monitoring = true
 		var area:Array = melee_hutBox.get_overlapping_areas()
 		for item in area.size():
-			area[item].get_parent().get_node("EnemyLogic").Damage(melee_damage)
-			print(area[item].get_parent().name, " recives melee damage: ", melee_damage)
-
-	
+			area[item].get_parent().get_node("EnemyLogic").Damage(damage_numbers.melee_base_damage)
+			print(area[item].get_parent().name, " recives melee damage: ", damage_numbers.melee_base_damage)
 	pass
 
 
 func Aim_And_Shoot(_delta)->void:
 	if player_inputs.Mouse_Button_1_Just_Pressed() and player_inputs.Mouse_Button_2_Pressed():
-		var b := new_bullet.instantiate()
-		shoot_position.add_child(b)
-		b.position = shoot_position.get_global_position()
-		b.velocity = get_global_mouse_position() - b.position
-		b.direction = get_global_mouse_position()
-		b.look_at(get_global_mouse_position())
-
-		# no estoy satisfecho con que la bala se mueva a distintas velocidades segun la distancia de crosshair
+		var bullet_instance := new_bullet.instantiate()
+		shoot_position.add_child(bullet_instance)
+		bullet_instance.position = shoot_position.get_global_position()
+		bullet_instance.velocity = get_global_mouse_position() - bullet_instance.position
+		bullet_instance.direction = get_global_mouse_position()
+		bullet_instance.look_at(get_global_mouse_position())
 	pass
 
 
@@ -67,7 +65,6 @@ func CrosshairPosition()->void:
 	
 func _draw()->void:
 	var pos:Vector2 = cross_hair.position
-	# if Input.is_action_pressed("fire2"):
 	if player_inputs.Mouse_Button_2_Pressed():
 		draw_line(shoot_position.get_global_position(), pos  , color, line_width, anti_alising)
 
