@@ -2,8 +2,6 @@ extends CharacterBody2D
 
 # stats son asignados desde la clase classes/BaseStatsClass.gd
 @onready var base_stats:BaseStats = BaseStats.new()
-@onready var move_speed:int = base_stats.move_speed
-
 @onready var bullet_arm := get_node("BulletArm")
 
 var timer:float = 0
@@ -37,7 +35,6 @@ func Dash(delta:float)->void:
     # TODO: EL TIMER DE CUENTA REGRESIVA HACERLO UN METODO GLOBAL, EN UNA CLASES
 
 
-    # if Input.is_action_just_pressed("space"):
     if player_inputs.Space_key_Just_Pressed():
         # al presionar space, inicia una cuenta regresiva, mientras este corriendo esta cuenta, el multiplicador de dash se incrementa y cuando termina la cuenta regresiva multiplicador dash regresa a default que es 1
         timer = base_stats.dash_timer
@@ -48,11 +45,11 @@ func Dash(delta:float)->void:
         dash_mult = 1
         timer = 0
     pass
-    
+
 
 func Move()->void:
     if player_inputs.Move_Vector() != Vector2.ZERO:
-        velocity = player_inputs.Move_Vector() * move_speed * dash_mult
+        velocity = player_inputs.Move_Vector() * base_stats.move_speed * dash_mult
     else:
         velocity = Vector2.ZERO
     move_and_slide()
