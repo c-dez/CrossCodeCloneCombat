@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var bullet_hurtBox:Area2D = get_node("Area2D")
-@onready var base_stats:= BaseStats.new()
+@onready var base_stats:= BaseStats.new() # bullet no tiene por que saber todos los baseStats, voy a tener que crear una clase para manejar damage
 
 var start_time:int = 1
 var direction = Vector2.ZERO
@@ -29,7 +29,7 @@ func _physics_process(delta):
         if area[item].get_parent().get_node("EnemyLogic"):
             area[item].get_parent().get_node("EnemyLogic").Damage(base_stats.bullet_damage)
             queue_free()
-            print(area[item].name, " damage: ", base_stats.bullet_damage)
+            print(area[item].get_parent().name, " recives bullet damage: ", base_stats.bullet_damage)
         # else:
         #     print(area[item].name)
 
@@ -38,5 +38,5 @@ func _physics_process(delta):
 
 func _on_timer_out():
     queue_free()
-    print("bullet destroyesd")
+    print("bullet timeout")
     pass

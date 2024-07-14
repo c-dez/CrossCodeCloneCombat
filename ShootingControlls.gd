@@ -9,7 +9,7 @@ extends Node2D
 var bullet_speed:int = 200
 
 # melee
-var melee_damage:int = 25
+var melee_damage:int = 25# hardcoded
 
 # parametros drawn_line() NOT IN USE
 var color:Color = Color(0,1,0, 0.3)
@@ -41,6 +41,8 @@ func Melee_Attack()->void:
 		var area:Array = melee_hutBox.get_overlapping_areas()
 		for item in area.size():
 			area[item].get_parent().get_node("EnemyLogic").Damage(melee_damage)
+			print(area[item].get_parent().name, " recives melee damage: ", melee_damage)
+
 	
 	pass
 
