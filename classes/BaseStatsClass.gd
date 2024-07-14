@@ -9,3 +9,5 @@ var life:int = 100
 var dash_mult:int = 3
 var dash_timer:float = 0.3
 
+var bullet_damage:int = 10
+

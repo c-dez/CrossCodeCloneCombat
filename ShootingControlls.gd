@@ -19,6 +19,10 @@ var anti_alising:bool = false
 # melee_hutBox
 @onready var melee_hutBox:Area2D = get_node("Area2D")
 
+# keybidings
+@onready var player_inputs = PlayerInputs.new()
+
+# TODO: EL NOMBRE DE ESTE SCRIPT DEBERIA SER ATTACK CONTROLS O ALGO ASI, QUE ESTE SCRIPT NO SOLO CONTROLA SHOOTING, TAMBIEN MELEE DAMAGE
 
 func _physics_process(delta):
 	CrosshairPosition()
@@ -28,11 +32,13 @@ func _physics_process(delta):
 	pass
 
 func Melee_Attack()->void:
+	# hurtbox debe de estar enfrente de el personaje
+	
 	melee_hutBox.global_position = shoot_position.global_position
 	melee_hutBox.look_at(cross_hair.position)
-	if Input.is_action_just_pressed("fire1") and !Input.is_action_pressed("fire2"):
+	if player_inputs.Mouse_Button_1_Just_Pressed() and !player_inputs.Mouse_Button_2_Pressed():
 		melee_hutBox.monitoring = true
-		var area = melee_hutBox.get_overlapping_areas()
+		var area:Array = melee_hutBox.get_overlapping_areas()
 		for item in area.size():
 			area[item].get_parent().get_node("EnemyLogic").Damage(melee_damage)
 	
@@ -40,8 +46,8 @@ func Melee_Attack()->void:
 
 
 func Aim_And_Shoot(_delta)->void:
-	if Input.is_action_just_pressed("fire1") and Input.is_action_pressed("fire2"):
-		var b = new_bullet.instantiate()
+	if player_inputs.Mouse_Button_1_Just_Pressed() and player_inputs.Mouse_Button_2_Pressed():
+		var b := new_bullet.instantiate()
 		shoot_position.add_child(b)
 		b.position = shoot_position.get_global_position()
 		b.velocity = get_global_mouse_position() - b.position
@@ -59,7 +65,8 @@ func CrosshairPosition()->void:
 	
 func _draw()->void:
 	var pos:Vector2 = cross_hair.position
-	if Input.is_action_pressed("fire2"):
+	# if Input.is_action_pressed("fire2"):
+	if player_inputs.Mouse_Button_2_Pressed():
 		draw_line(shoot_position.get_global_position(), pos  , color, line_width, anti_alising)
 
 	# draw_line(Vector2(300,300), Vector2(500,500),color)
