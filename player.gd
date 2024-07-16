@@ -4,12 +4,20 @@ extends CharacterBody2D
 @onready var base_stats:BaseStats = BaseStats.new()
 @onready var bullet_arm := get_node("BulletArm")
 
+#dash
+@onready var dash_coold_down_timer := Timer.new()
 var timer:float = 0
 var dash_mult:int = 1
+var can_dash:bool = true
 
 # keybindings
 @onready var player_inputs := PlayerInputs.new()
 
+func _ready():
+    add_child(dash_coold_down_timer)
+
+    dash_coold_down_timer.timeout.connect(_on_timer_out_dash_cooldown)
+    pass
 
 func _physics_process(delta:float):
     Move()
@@ -35,9 +43,14 @@ func Dash(delta:float)->void:
     # TODO: EL TIMER DE CUENTA REGRESIVA HACERLO UN METODO GLOBAL, EN UNA CLASES
 
 
-    if player_inputs.Space_key_Just_Pressed():
+    if player_inputs.Space_key_Just_Pressed() and can_dash:
         # al presionar space, inicia una cuenta regresiva, mientras este corriendo esta cuenta, el multiplicador de dash se incrementa y cuando termina la cuenta regresiva multiplicador dash regresa a default que es 1
         timer = base_stats.dash_timer
+
+        #  dash cool down timer empieza a correr y can dash = false
+        #  al termonar cool down timer can dash = true
+        dash_coold_down_timer.start(base_stats.dash_cooldown)
+        can_dash = false
     if timer > 0:
         timer -= delta
         dash_mult = base_stats.dash_mult
@@ -46,6 +59,9 @@ func Dash(delta:float)->void:
         timer = 0
     pass
 
+func _on_timer_out_dash_cooldown()->void:
+    can_dash = true
+    pass
 
 func Move()->void:
     if player_inputs.Move_Direction_Vector() != Vector2.ZERO:
