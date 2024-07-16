@@ -1,10 +1,12 @@
 class_name PlayerInputs
 
 # movement
-var left:String = "left"
-var right:String = "right"
-var up:String = "up"
-var down:String = "down"
+var direction_map:Dictionary = {
+    "left":"left",
+    "right":"right",
+    "up":"up",
+    "down":"down"
+}
 
 # buttons
 var keys_map:Dictionary = {
@@ -15,7 +17,7 @@ var keys_map:Dictionary = {
 
 func Move_Direction_Vector()->Vector2:
     var direction:Vector2
-    direction = Input.get_vector(left,right,up, down)
+    direction = Input.get_vector(direction_map.left,direction_map.right,direction_map.up, direction_map.down)
     direction.normalized()
     return direction
 
