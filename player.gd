@@ -1,12 +1,13 @@
 extends CharacterBody2D
 
 # stats son asignados desde la clase classes/BaseStatsClass.gd
-@onready var base_stats:BaseStats = BaseStats.new()
+# @onready var base_stats:BaseStats = BaseStats.new()
+
 @onready var bullet_arm := get_node("BulletArm")
 
 #dash
 @onready var dash_coold_down_timer := Timer.new()
-var timer:float = 0
+var dashing_time:float = 0
 var dash_mult:int = 1
 var can_dash:bool = true
 
@@ -15,7 +16,6 @@ var can_dash:bool = true
 
 func _ready():
     add_child(dash_coold_down_timer)
-
     dash_coold_down_timer.timeout.connect(_on_timer_out_dash_cooldown)
     pass
 
@@ -37,6 +37,7 @@ func BulletArm_Look_At()->void:
     bullet_arm.look_at(get_global_mouse_position())
     pass
 
+
 func Dash(delta:float)->void:
 
     # TODO: PONER UN COOLDOWN DEPUES DE USAR DASH CONSECUTIVOS , PARA EVITAR SPAM
@@ -45,18 +46,21 @@ func Dash(delta:float)->void:
 
     if player_inputs.Space_key_Just_Pressed() and can_dash:
         # al presionar space, inicia una cuenta regresiva, mientras este corriendo esta cuenta, el multiplicador de dash se incrementa y cuando termina la cuenta regresiva multiplicador dash regresa a default que es 1
-        timer = base_stats.dash_timer
 
-        #  dash cool down timer empieza a correr y can dash = false
-        #  al termonar cool down timer can dash = true
-        dash_coold_down_timer.start(base_stats.dash_cooldown)
+        # dashing_time = base_stats.dashing_time
+        dashing_time = BaseStatsClass.dashing_time
+        
+        #  dash cool down dashing_time empieza a correr y can dash = false
+        #  al termonar cool down dashing_time can dash = true
+        
+        dash_coold_down_timer.start(BaseStatsClass.dash_cooldown)
         can_dash = false
-    if timer > 0:
-        timer -= delta
-        dash_mult = base_stats.dash_mult
-    elif timer < 0:
+    if dashing_time > 0:
+        dashing_time -= delta
+        dash_mult = BaseStatsClass.dash_mult
+    elif dashing_time < 0:
         dash_mult = 1
-        timer = 0
+        dashing_time = 0
     pass
 
 func _on_timer_out_dash_cooldown()->void:
@@ -65,7 +69,9 @@ func _on_timer_out_dash_cooldown()->void:
 
 func Move()->void:
     if player_inputs.Move_Direction_Vector() != Vector2.ZERO:
-        velocity = player_inputs.Move_Direction_Vector() * base_stats.move_speed * dash_mult
+
+        # velocity = player_inputs.Move_Direction_Vector() * base_stats.move_speed * dash_mult
+        velocity = player_inputs.Move_Direction_Vector() * BaseStatsClass.move_speed * dash_mult
     else:
         velocity = Vector2.ZERO
     move_and_slide()
