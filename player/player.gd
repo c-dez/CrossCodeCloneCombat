@@ -18,7 +18,7 @@ func _ready():
 	dash_coold_down_timer.timeout.connect(_on_timer_out_dash_cooldown)
 	pass
 
-func _physics_process(delta:float):
+func _physics_process(delta:float)->void:
 	Move()
 	Dash(delta)           
 	BulletArm_Look_At()
