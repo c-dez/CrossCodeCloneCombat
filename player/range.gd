@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@onready var cross_hair = get_node("CrossHair")
+@onready var cross_hair := get_node("CrossHair")
 
 func _ready():
 	pass # Replace with function body.
@@ -21,4 +21,4 @@ func _draw()->void:
 	
 func draw_aim_line()->void:
 	if PlayerInputsClass.Mouse_Button_Right_Pressed():
-		draw_line(position,cross_hair.position,Color(1,1,1,1),1)
+		draw_dashed_line(position,cross_hair.position,Color(1,1,1,1),5,30, false)
