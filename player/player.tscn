@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/CrossCodeCloneCombat/player/player.gd" id="1_pchju"]
 [ext_resource type="Texture2D" uid="uid://fwpsosmyvegv" path="res://icon.svg" id="2_olghp"]
 [ext_resource type="Texture2D" uid="uid://bgp0q4mmxxe4g" path="res://crossHair_circulo.png" id="3_8pt0r"]
-[ext_resource type="PackedScene" uid="uid://b5gmwifgbv4kn" path="res://scripts/CrossCodeCloneCombat/attack.tscn" id="4_s8t0f"]
+[ext_resource type="PackedScene" uid="uid://b5gmwifgbv4kn" path="res://scripts/CrossCodeCloneCombat/player/attack.tscn" id="4_s8t0f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pdvem"]
 
