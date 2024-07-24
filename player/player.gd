@@ -29,7 +29,6 @@ func BulletArm_Look_At()->void:
 
 
 func Dash(delta:float)->void:
-	# TODO: EL TIMER DE CUENTA REGRESIVA HACERLO UN METODO GLOBAL, EN UNA CLASES?
 	if PlayerInputsClass.Space_key_Just_Pressed() and can_dash:
 		# al presionar space, inicia una cuenta regresiva, mientras este corriendo esta cuenta, el multiplicador de dash se incrementa y cuando termina la cuenta regresiva multiplicador dash regresa a default que es 1
 		dashing_time = BaseStatsClass.dash_timer
