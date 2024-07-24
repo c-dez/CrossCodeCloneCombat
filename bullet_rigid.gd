@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-var speed: = 20
+var speed:int = 30
 var target_pos := Vector2.ZERO
 var timer := Timer.new()
 var angle:float
@@ -19,7 +19,9 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 #	ESTO RESUELVE EL PROBLEMA QUE TENIA CON LA VELOCIDAD DE LA BALA SEGUN LA DISTANCIA A LA QUE SE DISPARA
 # con move and collide el vector que le doy de parametro es el angulo(atan2) de la pocicion global de el mouse multiplicado por la velocidad a la que quiero que la bala se mueva
-	move_and_collide(Vector2.from_angle(angle) * speed)
+	move_and_collide(Vector2.from_angle(angle).normalized() * speed)
+	
+# 	TODO: DETECTAR COLISIONES , HACER DANO
 	pass
 
 func _on_timer_timeout():
