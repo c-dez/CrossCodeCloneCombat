@@ -19,7 +19,7 @@ func do_damage(_damage:int)->void:
 		queue_free()
 		print(name , " died")
 	else:
-		print(name, life, " life")
+		print(name," ", life, " life")
 		
 		
 	

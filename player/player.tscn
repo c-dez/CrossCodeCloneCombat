@@ -26,3 +26,5 @@ position = Vector2(57, 1)
 texture = ExtResource("3_8pt0r")
 
 [node name="Attack" parent="Pivot/BulletStartingPoint" instance=ExtResource("4_s8t0f")]
+
+[node name="Camera2D" type="Camera2D" parent="."]

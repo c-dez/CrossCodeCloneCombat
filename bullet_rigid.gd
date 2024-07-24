@@ -24,22 +24,19 @@ func _physics_process(_delta: float) -> void:
 # con move and collide el vector que le doy de parametro es el angulo(atan2) de la pocicion global de el mouse multiplicado por la velocidad a la que quiero que la bala se mueva
 	move_and_collide(Vector2.from_angle(angle).normalized() * speed)
 	do_damage()
-# 	TODO: DETECTAR COLISIONES , HACER DANO
-
-	
 	pass
+	
 	
 func do_damage():
 	var areas:Array = collision.get_overlapping_bodies()
+# collision 4
 	for item in areas.size():
 		if areas[item].has_method("do_damage"):
 			areas[item].do_damage(damage)
 			queue_free()
 			pass
-		#areas[item].do_damage(damage)
-		#print(areas[item].name)
 	
-
+	
 func _on_timer_timeout():
 	queue_free()
 	print("free")
