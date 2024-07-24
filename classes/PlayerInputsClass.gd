@@ -1,6 +1,8 @@
 class_name PlayerInputs
 extends Node
 
+# TODO no me gusta el nombre de los methodos como mouse_right_pressed/ seria mejor aim_pressed
+
 # movement
 var direction_map:Dictionary = {
 	"left":"left",

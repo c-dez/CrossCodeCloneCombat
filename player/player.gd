@@ -17,13 +17,13 @@ func _ready()->void:
 func _physics_process(delta:float)->void:
 	Move()
 	Dash(delta)           
-	BulletArm_Look_At()
+	pivot_look_at()
 	Debug()
 
 	# TODO: EL HITBOX MIRA HACIA EL MOUSE, QUIERO QUE MIRE HACIA DONDE EL JUGADOR SE MUEVE?
 	pass
 
-func BulletArm_Look_At()->void:
+func pivot_look_at()->void:
 	pivot.look_at(get_global_mouse_position())
 	pass
 

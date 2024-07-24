@@ -30,13 +30,14 @@ func _physics_process(_delta: float) -> void:
 func do_damage():
 	var areas:Array = collision.get_overlapping_bodies()
 # collision 4
-	for item in areas.size():
-		if areas[item].has_method("do_damage"):
-			areas[item].do_damage(damage)
+	for i in areas.size():
+		#if areas[i].has_method("do_damage"):
+		if "do_damage" in areas[i]:
+			areas[i].do_damage(damage)
 			queue_free()
 			pass
 	
 	
 func _on_timer_timeout():
 	queue_free()
-	print("free")
+	
