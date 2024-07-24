@@ -1,5 +1,5 @@
-extends Node
 class_name EnemyLogic
+extends Node
 
 
 @onready var base_stats = BaseStats.new()
@@ -8,9 +8,9 @@ class_name EnemyLogic
 var life:int = 100
 
 func _physics_process(_delta):
-    pass
+	pass
 
 func Damage(damage:int)->void:
-    life -= damage
-    if life <= 0:
-        get_tree().queue_delete(get_parent())
+	life -= damage
+	if life <= 0:
+		get_tree().queue_delete(get_parent())

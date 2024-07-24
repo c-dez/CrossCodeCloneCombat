@@ -1,29 +1,29 @@
 extends CharacterBody2D
 
-@onready var enemy_logic_node = get_node("EnemyLogic")
-#player pos reference
-@onready var player = get_node("../Player")
 
-func _physics_process(delta:float):
-    velocity = player.global_position - position
+@onready var player := get_node("../Player")
+var life:int = 100
+var speed:int = 100
 
-    # if velocity.x < 0:
-    #     velocity.x = clamp(velocity.x,-50, -50)
-    # if velocity.x > 0:
-    #     velocity.x = clamp(velocity.x,50, 50)
 
-    # if velocity.y < 0:
-    #     velocity.y = clamp(velocity.y,-50, -50)
-    # if velocity.y > 0:
-    #     velocity.y = clamp(velocity.y,50 ,50)
-    # # velocity *= delta
+func _physics_process(_delta:float)->void:
+	velocity = player.global_position - global_position
+	velocity = EnemyLogicClass.base_stats.velocity_clamp(velocity, speed)
+	velocity.normalized()
+	move_and_slide()
+	
 
-    velocity = enemy_logic_node.base_stats.velocity_clamp(velocity, 50)
-    velocity.normalized()
-
-    # print(velocity)
-    move_and_slide()
-
+func do_damage(_damage:int)->void:
+	life -= _damage
+	if life <= 0 :
+		queue_free()
+		print(name , " died")
+	else:
+		print(name, life, " life")
+		
+		
+	
+	
 
 
 

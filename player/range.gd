@@ -25,12 +25,11 @@ func draw_aim_line()->void:
 	if PlayerInputsClass.Mouse_Button_Right_Pressed():
 		draw_dashed_line(position,cross_hair.position,Color(1,1,1,1),5,30, false)
 
-func shoot_bullet():
+func shoot_bullet()->void:
 	if PlayerInputsClass.Mouse_Button_Right_Pressed() and PlayerInputsClass.Mouse_Button_Left_Just_Pressed():
 		var target_pos := get_global_mouse_position() - global_position
-		var a = bullet_rb.instantiate()
+		var a := bullet_rb.instantiate()
 		a.target_pos = get_global_mouse_position() - global_position
 		add_child(a)
-		#a.look_at(get_global_mouse_position())
 		a.position = global_position
 	 

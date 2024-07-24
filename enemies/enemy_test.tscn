@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://ch3uafda5p24v"]
+
+[ext_resource type="Texture2D" uid="uid://fwpsosmyvegv" path="res://icon.svg" id="1_2g4xh"]
+[ext_resource type="Script" path="res://scripts/CrossCodeCloneCombat/enemies/enemy.gd" id="1_httqm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u6kag"]
+size = Vector2(113, 114)
+
+[node name="EnemyTest" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_httqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2g4xh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, -1)
+shape = SubResource("RectangleShape2D_u6kag")
