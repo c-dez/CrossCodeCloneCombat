@@ -1,7 +1,8 @@
 class_name PlayerInputs
 extends Node
 
-# TODO no me gusta el nombre de los methodos como mouse_right_pressed/ seria mejor aim_pressed
+# TODO cambiar los methodos de esta clase en los scripts, es menor solo usar los 
+# diccionarios para referenciar el string en methodo Input
 
 # movement
 var direction_map:Dictionary = {
@@ -44,3 +45,10 @@ func Mouse_Button_Right_Pressed()->bool:
 		return true
 	else:
 		return false
+
+func mouse_button_right_just_pressed()->bool:
+	if Input.is_action_just_pressed("fire2"):
+		return true
+	else:
+		return false
+	

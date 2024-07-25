@@ -11,19 +11,15 @@ var dash_mult:int = 3
 var dash_timer:float = 0.3
 var dash_cooldown:float =  0.5
 
-# usado por Enemy
+# TODO usado por Enemy cambiarlo de lugar
 func velocity_clamp(_velocity:Vector2, _clamp_number:int):
 	if _velocity.x < 0:
 		_velocity.x = clamp(_velocity.x,-_clamp_number, -_clamp_number)
 	if _velocity.x > 0:
 		_velocity.x = clamp(_velocity.x,_clamp_number, _clamp_number)
-
 	if _velocity.y < 0:
 		_velocity.y = clamp(_velocity.y,-_clamp_number, -_clamp_number)
 	if _velocity.y > 0:
 		_velocity.y = clamp(_velocity.y,_clamp_number ,_clamp_number)
-
-
 	_velocity.normalized()
-	# print(_velocity)
 	return _velocity

@@ -7,7 +7,7 @@ var angle:float
 var time_out:float = 5
 var damage:int = 50
 
-@onready var collision = get_node("Area2D")
+@onready var collision := get_node("Area2D")
 
 
 func _ready() -> void:
@@ -27,10 +27,10 @@ func _physics_process(_delta: float) -> void:
 	pass
 	
 	
-func do_damage():
+func do_damage()->void:
 	var areas:Array = collision.get_overlapping_bodies()
 # collision 4
-	for i in areas.size():
+	for i:int in areas.size():
 		#if areas[i].has_method("do_damage"):
 		if "do_damage" in areas[i]:
 			areas[i].do_damage(damage)

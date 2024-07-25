@@ -46,6 +46,7 @@ func Dash(delta:float)->void:
 	
 
 func _on_timer_out_dash_cooldown()->void:
+# se invoca en dash()
 	can_dash = true
 	pass
 

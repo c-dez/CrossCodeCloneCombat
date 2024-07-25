@@ -1,13 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqe4qw0i6x2bu"]
+[gd_scene load_steps=6 format=3 uid="uid://cqe4qw0i6x2bu"]
 
 [ext_resource type="Script" path="res://scripts/CrossCodeCloneCombat/player/player.gd" id="1_pchju"]
 [ext_resource type="Texture2D" uid="uid://fwpsosmyvegv" path="res://icon.svg" id="2_olghp"]
+[ext_resource type="Script" path="res://scripts/CrossCodeCloneCombat/player/health.gd" id="2_vr3jq"]
 [ext_resource type="PackedScene" uid="uid://b5gmwifgbv4kn" path="res://scripts/CrossCodeCloneCombat/player/attack.tscn" id="4_s8t0f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pdvem"]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_pchju")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_vr3jq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1.90735e-06, 2)
@@ -24,5 +28,3 @@ shape = SubResource("CircleShape2D_pdvem")
 position = Vector2(57, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[editable path="Pivot/Attack"]
