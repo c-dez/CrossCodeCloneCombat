@@ -71,7 +71,7 @@ func charge_countdown(_delta)->void:
 	#if PlayerInputsClass.Mouse_Button_Right_Pressed() and PlayerInputsClass.Mouse_Button_Left_Just_Pressed():
 	
 # cambie la  forma en que lee los inputs, solo para probar si es mas intuitiva de esta forma
-	if Input.is_action_pressed(PlayerInputsClass.keys_map.aim) and Input.is_action_just_released(PlayerInputsClass.keys_map.attack):
+	if Input.is_action_pressed(PlayerInputsClass.keys_map.aim) and Input.is_action_just_released(PlayerInputsClass.keys_map.attack) or Input.is_action_just_released(PlayerInputsClass.keys_map.aim):
 #spell discharge
 		charge_time_internal = charge_time
 		color = Color(1,1,1,1)
