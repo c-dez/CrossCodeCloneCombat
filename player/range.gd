@@ -7,6 +7,8 @@ extends Node2D
 # charge timer
 var charge_time:float = 1
 var charge_time_internal:float = charge_time
+var bullet_damage_mult:float = 1
+# draw line
 var color := Color(1,1,1,1)
 
 func _ready() -> void:
@@ -45,6 +47,7 @@ func aim_and_shoot()->void:
 		add_child(a)
 		a.position = global_position
 		
+		a.damage *= bullet_damage_mult
 		
 func charge_countdown(_delta)->void:
 # esta funcion se encarga de cargar un spell mas poderoso
@@ -60,12 +63,20 @@ func charge_countdown(_delta)->void:
 #spell charged
 			color = Color(1,0,0,1)
 			print("boom")
+			# boom code block goes here
+			
+			bullet_damage_mult = 1.25
 			charge_time_internal = 0
 # si mientras se mantiene presionado aim y se presiona attack internal se resetea
-	if PlayerInputsClass.Mouse_Button_Right_Pressed() and PlayerInputsClass.Mouse_Button_Left_Just_Pressed():
+	#if PlayerInputsClass.Mouse_Button_Right_Pressed() and PlayerInputsClass.Mouse_Button_Left_Just_Pressed():
+	
+# cambie la  forma en que lee los inputs, solo para probar si es mas intuitiva de esta forma
+	if Input.is_action_pressed(PlayerInputsClass.keys_map.aim) and Input.is_action_just_released(PlayerInputsClass.keys_map.attack):
 #spell discharge
 		charge_time_internal = charge_time
 		color = Color(1,1,1,1)
+		
+		bullet_damage_mult = 1
 	pass	
 
 	 
