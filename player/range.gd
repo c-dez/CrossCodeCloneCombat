@@ -33,30 +33,31 @@ func _draw()->void:
 	pass
 	
 func draw_aim_line()->void:
-# TODO cuando se esta apuntando reducir velocidad de movimiento de jugador
-
-	if PlayerInputsClass.Mouse_Button_Right_Pressed():
+	if Input.is_action_pressed(PlayerInputsClass.keys_map.aim):
 		draw_dashed_line(position,cross_hair.position,color,5,30, false)
+	pass
 		
-
+	
 func aim_and_shoot()->void:
-	if PlayerInputsClass.Mouse_Button_Right_Pressed() and PlayerInputsClass.Mouse_Button_Left_Just_Pressed():
+# TODO cuando se esta apuntando reducir velocidad de movimiento de jugador
+	
+	if Input.is_action_pressed(PlayerInputsClass.keys_map.aim) and Input.is_action_just_pressed(PlayerInputsClass.keys_map.attack):
 		var target_pos:Vector2 = get_global_mouse_position() - global_position
 		var a := bullet_rb.instantiate()
 		a.target_pos = target_pos
 		add_child(a)
 		a.position = global_position
-		
 		a.damage *= bullet_damage_mult
+	pass
+	
 		
 func charge_countdown(_delta)->void:
 # esta funcion se encarga de cargar un spell mas poderoso
-	
 # asigna internal al valor charge timer al presionar aim
-	if PlayerInputsClass.mouse_button_right_just_pressed():
+	if Input.is_action_just_pressed(PlayerInputsClass.keys_map.aim):	
 		charge_time_internal = charge_time
 # si aim esta presionado y internal es mayor que cero : empieza cuenta regresiva
-	if PlayerInputsClass.Mouse_Button_Right_Pressed() and charge_time_internal > 0:
+	if Input.is_action_pressed(PlayerInputsClass.keys_map.aim) and charge_time_internal > 0:
 		charge_time_internal -= _delta
 # cuando internal es menor que cero boom e internal = 0
 		if charge_time_internal < 0:
@@ -64,18 +65,13 @@ func charge_countdown(_delta)->void:
 			color = Color(1,0,0,1)
 			print("boom")
 			# boom code block goes here
-			
 			bullet_damage_mult = 1.25
 			charge_time_internal = 0
 # si mientras se mantiene presionado aim y se presiona attack internal se resetea
-	#if PlayerInputsClass.Mouse_Button_Right_Pressed() and PlayerInputsClass.Mouse_Button_Left_Just_Pressed():
-	
-# cambie la  forma en que lee los inputs, solo para probar si es mas intuitiva de esta forma
 	if Input.is_action_pressed(PlayerInputsClass.keys_map.aim) and Input.is_action_just_released(PlayerInputsClass.keys_map.attack) or Input.is_action_just_released(PlayerInputsClass.keys_map.aim):
 #spell discharge
 		charge_time_internal = charge_time
 		color = Color(1,1,1,1)
-		
 		bullet_damage_mult = 1
 	pass	
 
