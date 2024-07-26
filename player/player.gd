@@ -29,7 +29,7 @@ func pivot_look_at()->void:
 
 
 func Dash(delta:float)->void:
-	if PlayerInputsClass.Space_key_Just_Pressed() and can_dash:
+	if Input.is_action_just_pressed(PlayerInputsClass.keys_map.dash) and can_dash:
 		# al presionar space, inicia una cuenta regresiva, mientras este corriendo esta cuenta, el multiplicador de dash se incrementa y cuando termina la cuenta regresiva multiplicador dash regresa a default que es 1
 		dashing_time = BaseStatsClass.dash_timer
 		#  dash cool down dashing_time empieza a correr y can dash = false
@@ -51,8 +51,9 @@ func _on_timer_out_dash_cooldown()->void:
 	pass
 
 func Move()->void:
-	if PlayerInputsClass.Move_Direction_Vector() != Vector2.ZERO:
-		velocity = PlayerInputsClass.Move_Direction_Vector() * BaseStatsClass.move_speed * dash_mult
+	var direction:Vector2 = PlayerInputsClass.Move_Direction_Vector()
+	if direction != Vector2.ZERO:
+		velocity = direction * BaseStatsClass.move_speed * dash_mult
 	else:
 		velocity = Vector2.ZERO
 	move_and_slide()
