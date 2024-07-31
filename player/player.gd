@@ -24,7 +24,8 @@ func _physics_process(delta:float)->void:
 	pass
 
 func pivot_look_at()->void:
-	pivot.look_at(get_global_mouse_position())
+	var mouse_pos:Vector2 = get_global_mouse_position()
+	pivot.look_at(mouse_pos)
 	pass
 
 
@@ -61,6 +62,7 @@ func Move()->void:
 
 
 func Debug():
+# TODO: borrar
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
 	pass

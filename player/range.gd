@@ -18,10 +18,10 @@ func _ready() -> void:
 func _process(_delta:float) -> void:
 	cross_hair_position()
 	charge_countdown(_delta)
+	queue_redraw()
 	pass
 	
 func _physics_process(_delta:float)->void:
-	queue_redraw()
 	aim_and_shoot()
 	
 	pass
@@ -64,7 +64,7 @@ func charge_countdown(_delta:float)->void:
 		if charge_time_internal < 0:
 			#spell charged
 			color = Color(1,0,0,1)
-			print("boom")
+			#print("boom")
 			# boom code block goes here
 			bullet_damage_mult = mult
 			charge_time_internal = 0

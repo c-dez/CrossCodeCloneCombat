@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 
 @onready var player := get_node("../Player")
-var life:int = 100
-var speed:int = 100
+@export var life:int = 100
+@export var speed:int = 100
 
 
 func _physics_process(_delta:float)->void:
@@ -34,7 +34,7 @@ func speed_clamp(_velocity:Vector2, _speed:int)->Vector2:
 		_velocity.y = clamp(_velocity.y,_speed ,_speed)
 	_velocity.normalized()
 	return _velocity
-	pass	
+		
 
 
 
