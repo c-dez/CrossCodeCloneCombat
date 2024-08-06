@@ -8,10 +8,18 @@ var dashing_time:float = 0
 var dash_mult:int = 1
 var can_dash:bool = true
 
+#debugging
+@onready var ui = get_node("ui")
+@onready var health_node = get_node("Health")
+
+# hurtbox
+@onready var hurtbox := get_node("Hurtbox")
+
 
 func _ready()->void:
 	add_child(dash_coold_down_timer)
 	dash_coold_down_timer.timeout.connect(_on_timer_out_dash_cooldown)
+
 	pass
 
 func _physics_process(delta:float)->void:
@@ -22,6 +30,8 @@ func _physics_process(delta:float)->void:
 
 	# TODO: EL HITBOX MIRA HACIA EL MOUSE, QUIERO QUE MIRE HACIA DONDE EL JUGADOR SE MUEVE?
 	pass
+
+
 
 func pivot_look_at()->void:
 	var mouse_pos:Vector2 = get_global_mouse_position()
@@ -51,6 +61,7 @@ func _on_timer_out_dash_cooldown()->void:
 	can_dash = true
 	pass
 
+
 func Move()->void:
 	var direction:Vector2 = PlayerInputsClass.Move_Direction_Vector()
 	if direction != Vector2.ZERO:
@@ -65,4 +76,9 @@ func Debug():
 # TODO: borrar
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
+		
+	# simula player recibiendo dano	
+	if Input.is_action_just_pressed("test"):
+# tecla "T"
+		pass
 	pass

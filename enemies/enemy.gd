@@ -20,6 +20,9 @@ func do_damage(_damage:int)->void:
 	else:
 		print(name," ", life, " life")
 		
+func do_melee_damage():
+	print("melee ", name)
+		
 		
 	
 func speed_clamp(_velocity:Vector2, _speed:int)->Vector2:

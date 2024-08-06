@@ -17,11 +17,11 @@ func _ready() -> void:
 	
 func _process(_delta:float) -> void:
 	cross_hair_position()
-	charge_countdown(_delta)
 	queue_redraw()
 	pass
 	
 func _physics_process(_delta:float)->void:
+	charge_countdown(_delta)
 	aim_and_shoot()
 	
 	pass
@@ -62,7 +62,7 @@ func charge_countdown(_delta:float)->void:
 		charge_time_internal -= _delta
 		# cuando internal es menor que cero boom e internal = 0
 		if charge_time_internal < 0:
-			#spell charged
+			#spell chargedz
 			color = Color(1,0,0,1)
 			#print("boom")
 			# boom code block goes here

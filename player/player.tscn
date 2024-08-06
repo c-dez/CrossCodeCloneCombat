@@ -1,14 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqe4qw0i6x2bu"]
+[gd_scene load_steps=9 format=3 uid="uid://cqe4qw0i6x2bu"]
 
 [ext_resource type="Script" path="res://scripts/CrossCodeCloneCombat/player/player.gd" id="1_pchju"]
 [ext_resource type="Texture2D" uid="uid://fwpsosmyvegv" path="res://icon.svg" id="2_olghp"]
 [ext_resource type="Script" path="res://scripts/CrossCodeCloneCombat/player/health.gd" id="2_vr3jq"]
 [ext_resource type="PackedScene" uid="uid://b5gmwifgbv4kn" path="res://scripts/CrossCodeCloneCombat/player/attack.tscn" id="4_s8t0f"]
+[ext_resource type="PackedScene" uid="uid://c37ymrs3ev26j" path="res://ui/ui.tscn" id="5_mdfry"]
+[ext_resource type="Script" path="res://scripts/CrossCodeCloneCombat/player/Hurtbox.gd" id="6_3kjbh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pdvem"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w74u0"]
+size = Vector2(69, 68)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_pchju")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(4.295, 4.295)
+shape = SubResource("CircleShape2D_pdvem")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_vr3jq")
@@ -18,13 +27,22 @@ position = Vector2(-1.90735e-06, 2)
 scale = Vector2(0.578125, 0.578125)
 texture = ExtResource("2_olghp")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(4.295, 4.295)
-shape = SubResource("CircleShape2D_pdvem")
-
 [node name="Pivot" type="Marker2D" parent="."]
 
 [node name="Attack" parent="Pivot" instance=ExtResource("4_s8t0f")]
 position = Vector2(57, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="ui" parent="." instance=ExtResource("5_mdfry")]
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("6_3kjbh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-0.5, 2)
+shape = SubResource("RectangleShape2D_w74u0")
+
+[connection signal="body_entered" from="Hurtbox" to="Health" method="_on_hurtbox_body_entered"]
