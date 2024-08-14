@@ -19,8 +19,8 @@ func you_died()->void:
 
 
 
-func _on_hurtbox_body_entered(body: Node2D) -> void:
-	
-	body.do_melee_damage()
-	
-	pass # Replace with function body.
+#func _on_hurtbox_body_entered(body: Node2D) -> void:
+	#
+	#body.do_melee_damage()
+	#
+	#pass # Replace with function body.

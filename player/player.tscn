@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/CrossCodeCloneCombat/player/health.gd" id="2_vr3jq"]
 [ext_resource type="PackedScene" uid="uid://b5gmwifgbv4kn" path="res://scripts/CrossCodeCloneCombat/player/attack.tscn" id="4_s8t0f"]
 [ext_resource type="PackedScene" uid="uid://c37ymrs3ev26j" path="res://ui/ui.tscn" id="5_mdfry"]
-[ext_resource type="Script" path="res://scripts/CrossCodeCloneCombat/player/Hitbox.gd" id="6_3kjbh"]
+[ext_resource type="Script" path="res://scripts/CrossCodeCloneCombat/player/hitbox.gd" id="6_n8mrv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pdvem"]
 
@@ -16,7 +16,7 @@ size = Vector2(69, 68)
 script = ExtResource("1_pchju")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(4.295, 4.295)
+scale = Vector2(3.735, 4.295)
 shape = SubResource("CircleShape2D_pdvem")
 
 [node name="Health" type="Node" parent="."]
@@ -32,17 +32,23 @@ texture = ExtResource("2_olghp")
 [node name="Attack" parent="Pivot" instance=ExtResource("4_s8t0f")]
 position = Vector2(57, 1)
 
+[node name="Melee" parent="Pivot/Attack" index="1"]
+position = Vector2(24, 0)
+collision_layer = 16
+collision_mask = 16
+
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="ui" parent="." instance=ExtResource("5_mdfry")]
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 8
-script = ExtResource("6_3kjbh")
+scale = Vector2(0.52, 0.8)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("6_n8mrv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(-0.5, 2)
 shape = SubResource("RectangleShape2D_w74u0")
 
-[connection signal="body_entered" from="Hitbox" to="Health" method="_on_hurtbox_body_entered"]
+[editable path="Pivot/Attack"]

@@ -35,6 +35,7 @@ func hitbox_behhavior()->void:
 				# si melee_damage existe en filter_areas[0], invoca este metodo y comienza cuenta regresiva, al terminar la cuenta regresiva, monitoring y visible se activan
 				filter_areas[0].melee_damage()
 				inv_frames_timer.start(inv_frames_cd)
+			
 			# puedo expandir los metodos que se invocan, pero tienen que seguir orden de ejecucion y solo uno puede ser ejecutado
 			
 			# TENER CUIDADO CON ERRORES, ESTOY USANDO DUCK TYPING!
