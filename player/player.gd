@@ -13,7 +13,7 @@ var can_dash:bool = true
 @onready var health_node = get_node("Health")
 
 # hurtbox
-@onready var hurtbox := get_node("Hitbox")
+@onready var player_hitbox := get_node("player_hitbox")
 
 
 func _ready()->void:

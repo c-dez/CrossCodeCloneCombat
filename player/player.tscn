@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/CrossCodeCloneCombat/player/health.gd" id="2_vr3jq"]
 [ext_resource type="PackedScene" uid="uid://b5gmwifgbv4kn" path="res://scripts/CrossCodeCloneCombat/player/attack.tscn" id="4_s8t0f"]
 [ext_resource type="PackedScene" uid="uid://c37ymrs3ev26j" path="res://ui/ui.tscn" id="5_mdfry"]
-[ext_resource type="Script" path="res://scripts/CrossCodeCloneCombat/player/hitbox.gd" id="6_n8mrv"]
+[ext_resource type="Script" path="res://scripts/CrossCodeCloneCombat/player/player_hitbox.gd" id="6_v8raq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pdvem"]
 
@@ -41,13 +41,13 @@ collision_mask = 16
 
 [node name="ui" parent="." instance=ExtResource("5_mdfry")]
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="player_hitbox" type="Area2D" parent="."]
 scale = Vector2(0.52, 0.8)
 collision_layer = 16
 collision_mask = 16
-script = ExtResource("6_n8mrv")
+script = ExtResource("6_v8raq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_hitbox"]
 position = Vector2(-0.5, 2)
 shape = SubResource("RectangleShape2D_w74u0")
 

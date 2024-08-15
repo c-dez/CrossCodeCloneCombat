@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export var speed:int = 100
 
 
+
 func _physics_process(_delta:float)->void:
 	velocity = player.global_position - global_position
 	speed_clamp(velocity, speed)
